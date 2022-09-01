@@ -1,21 +1,17 @@
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import {
-  Text,
+  SafeAreaView,
   View,
   StyleSheet,
   TextInput,
-  SafeAreaView,
-  FlatList,
+  ActivityIndicator,
 } from "react-native";
-import { GEO_API_URL, geoApiOptions } from "../api";
+import { WEATHER_API_URL } from "../api";
 import axios from "axios";
-import openWeatherKey from "../config/env";
+import CurrentWeather from "./CurrentWeather";
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-  },
-
+  container: {},
   input: {
     height: 40,
     margin: 12,
@@ -30,10 +26,25 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
-  const fetchDataHandler = useCallback(() => {}, []);
+  const api = WEATHER_API_URL;
+
+  const fetchDataHandler = useCallback(() => {
+    setLoading(true);
+    setInput("");
+    axios({
+      method: "GET",
+      url: `${api.baseUrl}weather?q=${input}&units=metric&appid=${api.key}`,
+    })
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+      })
+      .catch((error) => console.dir(error))
+      .finally(() => setLoading(false));
+  }, [api.baseUrl, input, api.key]);
 
   return (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.container}>
       <TextInput
         placeholder="Search for city"
         style={styles.input}
@@ -42,7 +53,13 @@ const Search = () => {
         placeholderTextColor={"#454545"}
         onSubmitEditing={fetchDataHandler}
       />
-    </View>
+      {loading && (
+        <View>
+          <ActivityIndicator size={"large"} color="#000" />
+        </View>
+      )}
+      <CurrentWeather data={data} />
+    </SafeAreaView>
   );
 };
 
