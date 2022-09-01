@@ -1,7 +1,12 @@
-import { Text } from "react-native";
+import { SafeAreaView } from "react-native";
+import Search from "../components/Search";
 
 const Home = () => {
-  return <Text>Home</Text>;
+  return (
+    <SafeAreaView>
+      <Search />
+    </SafeAreaView>
+  );
 };
 
 export default Home;
