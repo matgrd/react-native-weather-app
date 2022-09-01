@@ -10,7 +10,7 @@ const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: "transparent",
+    background: "#d5d4d4",
   },
 };
 
@@ -22,7 +22,7 @@ const App = () => {
   });
 
   if (!loaded) return null;
-  
+
   return (
     <NavigationContainer theme={theme}>
       <Stack.Navigator
