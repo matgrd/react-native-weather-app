@@ -11,7 +11,6 @@ import axios from "axios";
 import CurrentWeather from "./CurrentWeather";
 
 const styles = StyleSheet.create({
-  container: {},
   input: {
     height: 40,
     margin: 12,
@@ -24,27 +23,38 @@ const styles = StyleSheet.create({
 const Search = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+
+  const [currentWeather, setCurrentWeather] = useState(null);
+  const [forecastWeather, setForecastWeather] = useState([]);
 
   const api = WEATHER_API_URL;
 
   const fetchDataHandler = useCallback(() => {
     setLoading(true);
-    setInput("");
-    axios({
-      method: "GET",
-      url: `${api.baseUrl}weather?q=${input}&units=metric&appid=${api.key}`,
-    })
-      .then((response) => {
-        console.log(response.data);
-        setData(response.data);
+    axios
+      .all([
+        axios.get(
+          `${api.baseUrl}weather?q=${input}&units=metric&appid=${api.key}`
+        ),
+        axios.get(
+          `${api.baseUrl}forecast?q=${input}&units=metric&appid=${api.key}`
+        ),
+      ])
+      .then((responseArr) => {
+        console.log("Date created: ", responseArr[0].data);
+        console.log("Date created: ", responseArr[1].data);
+        setCurrentWeather(responseArr[0].data);
+        setForecastWeather(responseArr[1].data);
       })
-      .catch((error) => console.dir(error))
-      .finally(() => setLoading(false));
+      .catch((err) => console.dir(err))
+      .finally(() => {
+        setInput("");
+        setLoading(false);
+      });
   }, [api.baseUrl, input, api.key]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       <TextInput
         placeholder="Search for city"
         style={styles.input}
@@ -58,7 +68,7 @@ const Search = () => {
           <ActivityIndicator size={"large"} color="#000" />
         </View>
       )}
-      <CurrentWeather data={data} />
+      {currentWeather && <CurrentWeather data={currentWeather} />}
     </SafeAreaView>
   );
 };
