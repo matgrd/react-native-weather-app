@@ -9,6 +9,7 @@ import {
 import { WEATHER_API_URL } from "../api";
 import axios from "axios";
 import CurrentWeather from "./CurrentWeather";
+import ForecastWeather from "./ForecastWeather";
 
 const styles = StyleSheet.create({
   input: {
@@ -25,7 +26,7 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
 
   const [currentWeather, setCurrentWeather] = useState(null);
-  const [forecastWeather, setForecastWeather] = useState([]);
+  const [forecastWeather, setForecastWeather] = useState(null);
 
   const api = WEATHER_API_URL;
 
@@ -69,6 +70,8 @@ const Search = () => {
         </View>
       )}
       {currentWeather && <CurrentWeather data={currentWeather} />}
+      {forecastWeather && <ForecastWeather data={forecastWeather} />}
+
     </SafeAreaView>
   );
 };
