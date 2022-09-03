@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -30,7 +30,7 @@ const Search = () => {
 
   const api = WEATHER_API_URL;
 
-  const fetchDataHandler = useCallback(() => {
+  const fetchDataHandler = () => {
     setLoading(true);
     axios
       .all([
@@ -52,7 +52,7 @@ const Search = () => {
         setInput("");
         setLoading(false);
       });
-  }, [api.baseUrl, input, api.key]);
+  };
 
   return (
     <SafeAreaView>
@@ -71,7 +71,6 @@ const Search = () => {
       )}
       {currentWeather && <CurrentWeather data={currentWeather} />}
       {forecastWeather && <ForecastWeather data={forecastWeather} />}
-
     </SafeAreaView>
   );
 };
