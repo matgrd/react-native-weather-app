@@ -12,6 +12,7 @@
     "@expo/webpack-config": "^0.17.0",
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/stack": "^6.2.3",
+    "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
     "expo": "~46.0.9",
     "expo-font": "^10.2.0",
@@ -20,7 +21,9 @@
     "react-dom": "18.0.0",
     "react-native": "0.69.5",
     "react-native-dotenv": "^3.3.1",
-    "react-native-web": "~0.18.7"
+    "react-native-web": "~0.18.7",
+    "react-redux": "^8.0.2",
+    "redux": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
