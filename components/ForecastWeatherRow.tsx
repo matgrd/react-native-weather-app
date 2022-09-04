@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
   day: {
     fontWeight: "600",
   },
-  description: {},
   minMax: {
     color: "#757575",
   },
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const WeatherRow = ({ item, index }: any) => {
+const ForecastWeatherRow = ({ item, index }: any) => {
   const dayInAWeek = new Date().getDay();
   const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(
     WEEK_DAYS.slice(0, dayInAWeek)
@@ -57,9 +56,9 @@ const WeatherRow = ({ item, index }: any) => {
 
   return (
     <>
-      <View style={styles.dailyItem} key={index}>
+      <View style={styles.dailyItem}>
         <Text style={styles.day}>{forecastDays[index]}</Text>
-        <Text style={styles.description}>
+        <Text>
           {`${item.weather[0].description
             .charAt(0)
             .toUpperCase()}${item.weather[0].description.slice(1)}`}
@@ -117,4 +116,4 @@ const WeatherRow = ({ item, index }: any) => {
   );
 };
 
-export default WeatherRow;
+export default ForecastWeatherRow;
