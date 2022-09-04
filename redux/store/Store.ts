@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
+import { geographicalCoordinatesSlice } from "../slices/geographicalCoordinatesSlice";
 
-const reducer = combineReducers({});
+const reducer = combineReducers({
+  geographicalCoordinates: geographicalCoordinatesSlice.reducer,
+});
 
 export const store = configureStore({ reducer });
 
