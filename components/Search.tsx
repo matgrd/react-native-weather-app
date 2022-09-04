@@ -4,10 +4,21 @@ import {
   View,
   StyleSheet,
   TextInput,
-  ActivityIndicator,
+  TouchableWithoutFeedback,
+  Keyboard,
+  FlatList,
+  Pressable,
+  Text,
 } from "react-native";
-import { WEATHER_API_URL } from "../api";
-import axios from "axios";
+import { MaterialIcons } from "@expo/vector-icons";
+import { geoApiOptions, geoApiUrl } from "../api";
+import { City } from "../types/city";
+import { useAppDispatch } from "../redux/hooks/Hooks";
+import {
+  setLatitude,
+  setLongitude,
+  setStatus,
+} from "../redux/slices/geographicalCoordinatesSlice";
 import CurrentWeather from "./CurrentWeather";
 import ForecastWeather from "./ForecastWeather";
 
@@ -25,53 +36,77 @@ const Search = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const [currentWeather, setCurrentWeather] = useState(null);
-  const [forecastWeather, setForecastWeather] = useState(null);
+  const [citiesData, setCitiesData] = useState(null);
 
-  const api = WEATHER_API_URL;
+  const dispatch = useAppDispatch();
 
-  const fetchDataHandler = () => {
+  const loadOptions = async (text: string) => {
+    setInput(text);
+
+    if (text.length > 2) {
+      let response = await fetch(
+        `${geoApiUrl}/cities?minPopulation=10000&namePrefix=${text}`,
+        geoApiOptions
+      );
+      if (response) {
+        const data = await response.json();
+        setCitiesData(data.data);
+      }
+    }
+  };
+
+  const getSearchItem = (item: City) => {
+    return (
+      <View style={{ flexDirection: "row", alignItems: "center", padding: 15 }}>
+        <MaterialIcons
+          name={item.type === "CITY" ? "location-city" : "location-on"}
+          color={"black"}
+          size={30}
+        />
+        <View style={{ marginLeft: 10, flexShrink: 1 }}>
+          <Text style={{ fontWeight: "700" }}>{item.name}</Text>
+          <Text style={{ fontSize: 12 }}>{item.country}</Text>
+        </View>
+      </View>
+    );
+  };
+
+  const handleOnPress = (item: City) => {
+    const latitude = JSON.stringify(item.latitude);
+    const longitude = JSON.stringify(item.longitude);
+
+    dispatch(setLatitude(latitude));
+    dispatch(setLongitude(longitude));
+    dispatch(setStatus(true));
+    setCitiesData(null);
+    setInput("");
     setLoading(true);
-    axios
-      .all([
-        axios.get(
-          `${api.baseUrl}weather?q=${input}&units=metric&appid=${api.key}`
-        ),
-        axios.get(
-          `${api.baseUrl}forecast?q=${input}&units=metric&appid=${api.key}`
-        ),
-      ])
-      .then((responseArr) => {
-        console.log("Date created: ", responseArr[0].data);
-        console.log("Date created: ", responseArr[1].data);
-        setCurrentWeather(responseArr[0].data);
-        setForecastWeather(responseArr[1].data);
-      })
-      .catch((err) => console.dir(err))
-      .finally(() => {
-        setInput("");
-        setLoading(false);
-      });
   };
 
   return (
-    <SafeAreaView>
-      <TextInput
-        placeholder="Search for city"
-        style={styles.input}
-        onChangeText={(text) => setInput(text)}
-        value={input}
-        placeholderTextColor={"#454545"}
-        onSubmitEditing={fetchDataHandler}
-      />
-      {loading && (
-        <View>
-          <ActivityIndicator size={"large"} color="#000" />
-        </View>
-      )}
-      {currentWeather && <CurrentWeather data={currentWeather} />}
-      {forecastWeather && <ForecastWeather data={forecastWeather} />}
-    </SafeAreaView>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <SafeAreaView>
+        <TextInput
+          style={styles.input}
+          placeholder="Search for city"
+          value={input}
+          onChangeText={loadOptions}
+          placeholderTextColor={"#454545"}
+        />
+        <FlatList
+          data={citiesData}
+          renderItem={({ item, index }) => (
+            <Pressable onPress={() => handleOnPress(item)}>
+              {getSearchItem(item)}
+            </Pressable>
+          )}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
+        />
+        {loading && <CurrentWeather />}
+        {loading && <ForecastWeather />}
+      </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 };
 
