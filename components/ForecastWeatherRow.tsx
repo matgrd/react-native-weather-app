@@ -16,10 +16,14 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
   },
   day: {
-    fontWeight: "600",
+    fontFamily: "RobotoBold",
+  },
+  description: {
+    fontFamily: "RobotoRegular",
   },
   minMax: {
     color: "#757575",
+    fontFamily: "RobotoRegular",
   },
   arrowDropDownIcon: {
     width: 35,
@@ -39,10 +43,11 @@ const styles = StyleSheet.create({
   },
   parameterLabel: {
     fontSize: 14,
+    fontFamily: "RobotoRegular",
   },
   parameterValue: {
     fontSize: 14,
-    fontWeight: "600",
+    fontFamily: "RobotoBold",
   },
 });
 
@@ -58,7 +63,7 @@ const ForecastWeatherRow = ({ item, index }: any) => {
     <>
       <View style={styles.dailyItem}>
         <Text style={styles.day}>{forecastDays[index]}</Text>
-        <Text>
+        <Text style={styles.description}>
           {`${item.weather[0].description
             .charAt(0)
             .toUpperCase()}${item.weather[0].description.slice(1)}`}
