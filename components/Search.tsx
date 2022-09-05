@@ -1,17 +1,14 @@
 import { useState } from "react";
 import {
   SafeAreaView,
-  View,
   StyleSheet,
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
   FlatList,
   Pressable,
-  Text,
   ScrollView,
 } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
 import { geoApiOptions, geoApiUrl } from "../api";
 import { City } from "../types/city";
 import { useAppDispatch } from "../redux/hooks/Hooks";
@@ -22,6 +19,7 @@ import {
 } from "../redux/slices/geographicalCoordinatesSlice";
 import CurrentWeather from "./CurrentWeather";
 import ForecastWeather from "./ForecastWeather";
+import SearchItem from "./SearchItem";
 
 const styles = StyleSheet.create({
   input: {
@@ -56,22 +54,6 @@ const Search = () => {
     }
   };
 
-  const getSearchItem = (item: City) => {
-    return (
-      <View style={{ flexDirection: "row", alignItems: "center", padding: 15 }}>
-        <MaterialIcons
-          name={item.type === "CITY" ? "location-city" : "location-on"}
-          color={"black"}
-          size={30}
-        />
-        <View style={{ marginLeft: 10, flexShrink: 1 }}>
-          <Text style={{ fontWeight: "700" }}>{item.name}</Text>
-          <Text style={{ fontSize: 12 }}>{item.country}</Text>
-        </View>
-      </View>
-    );
-  };
-
   const handleOnPress = (item: City) => {
     const latitude = JSON.stringify(item.latitude);
     const longitude = JSON.stringify(item.longitude);
@@ -97,11 +79,13 @@ const Search = () => {
         <ScrollView horizontal={true}>
           <FlatList
             data={citiesData}
-            renderItem={({ item }) => (
-              <Pressable onPress={() => handleOnPress(item)}>
-                {getSearchItem(item)}
-              </Pressable>
-            )}
+            renderItem={({ item }) => {
+              return (
+                <Pressable onPress={() => handleOnPress(item)}>
+                  <SearchItem item={item} />
+                </Pressable>
+              );
+            }}
             keyExtractor={(item) => item.id}
             showsVerticalScrollIndicator={false}
           />
