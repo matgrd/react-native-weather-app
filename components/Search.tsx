@@ -9,6 +9,7 @@ import {
   FlatList,
   Pressable,
   Text,
+  ScrollView,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { geoApiOptions, geoApiUrl } from "../api";
@@ -93,16 +94,18 @@ const Search = () => {
           onChangeText={loadOptions}
           placeholderTextColor={"#454545"}
         />
-        <FlatList
-          data={citiesData}
-          renderItem={({ item, index }) => (
-            <Pressable onPress={() => handleOnPress(item)}>
-              {getSearchItem(item)}
-            </Pressable>
-          )}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-        />
+        <ScrollView horizontal={true}>
+          <FlatList
+            data={citiesData}
+            renderItem={({ item }) => (
+              <Pressable onPress={() => handleOnPress(item)}>
+                {getSearchItem(item)}
+              </Pressable>
+            )}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+          />
+        </ScrollView>
         {loading && <CurrentWeather />}
         {loading && <ForecastWeather />}
       </SafeAreaView>
