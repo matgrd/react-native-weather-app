@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     margin: 12,
     marginBottom: 0,
     fontSize: 36,
+    fontFamily: "RobotoBold",
   },
 });
 
