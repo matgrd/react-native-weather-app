@@ -1,27 +1,9 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { City } from "../types/city";
+import { City } from "../SearchTypes";
+import { styles } from "./SearchItemStyles";
 
-const styles = StyleSheet.create({
-  box: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 15,
-  },
-  item: {
-    marginLeft: 10,
-    flexShrink: 1,
-  },
-  name: {
-    fontFamily: "RobotoBold",
-  },
-  country: {
-    fontSize: 12,
-    fontFamily: "RobotoRegular",
-  },
-});
-
-const SearchItem = ({ item }: City) => {
+const SearchItem = ({ item }: { item: City }) => {
   return (
     <View style={styles.box}>
       <MaterialIcons

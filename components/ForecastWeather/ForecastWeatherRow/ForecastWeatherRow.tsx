@@ -1,64 +1,10 @@
-import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
-import { useState } from "react";
+import { List } from "../ForecastWeatherTypes";
+import { styles } from "./ForecastWeatherRowStyles";
+import { useForecastWeatherRow } from "./useForecastWeatherRow";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 
-const WEEK_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
-const styles = StyleSheet.create({
-  dailyItem: {
-    margin: 12,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#f5f5f5",
-    borderRadius: 15,
-    height: 50,
-    paddingHorizontal: 20,
-    paddingVertical: 5,
-  },
-  day: {
-    fontFamily: "RobotoBold",
-  },
-  description: {
-    fontFamily: "RobotoRegular",
-  },
-  minMax: {
-    color: "#757575",
-    fontFamily: "RobotoRegular",
-  },
-  arrowDropDownIcon: {
-    width: 35,
-    height: 35,
-  },
-  details: {
-    marginHorizontal: 18,
-    marginVertical: 6,
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-  parameterRow: {
-    width: "50%",
-    paddingHorizontal: 5,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  parameterLabel: {
-    fontSize: 14,
-    fontFamily: "RobotoRegular",
-  },
-  parameterValue: {
-    fontSize: 14,
-    fontFamily: "RobotoBold",
-  },
-});
-
-const ForecastWeatherRow = ({ item, index }: any) => {
-  const dayInAWeek = new Date().getDay();
-  const forecastDays = WEEK_DAYS.slice(dayInAWeek, WEEK_DAYS.length).concat(
-    WEEK_DAYS.slice(0, dayInAWeek)
-  );
-
-  const [showDetails, setShowDetails] = useState(false);
-
+const ForecastWeatherRow = ({ item, index }: { item: List; index: number }) => {
+  const { forecastDays, showDetails, setShowDetails } = useForecastWeatherRow();
   return (
     <>
       <View style={styles.dailyItem}>
@@ -81,8 +27,8 @@ const ForecastWeatherRow = ({ item, index }: any) => {
             style={styles.arrowDropDownIcon}
             source={
               showDetails
-                ? require("../assets/icons/arrow_drop_up.png")
-                : require("../assets/icons/arrow_drop_down.png")
+                ? require("../../../assets/icons/arrow_drop_up.png")
+                : require("../../../assets/icons/arrow_drop_down.png")
             }
           />
         </TouchableOpacity>
