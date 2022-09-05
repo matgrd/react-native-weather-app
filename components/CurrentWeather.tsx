@@ -26,11 +26,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: "#fff",
     flexWrap: "wrap",
+    fontFamily: "RobotoMedium",
   },
   weatherDescription: {
     fontSize: 18,
     color: "#fff",
     marginTop: 5,
+    fontFamily: "RobotoRegular",
   },
   weatherIcon: {
     width: 125,
@@ -47,12 +49,13 @@ const styles = StyleSheet.create({
     fontSize: 65,
     color: "#fff",
     letterSpacing: -5,
+    fontFamily: "RobotoMedium",
   },
   details: {
     fontSize: 12,
     color: "#fff",
     paddingLeft: 15,
-    paddingBottom: 30,
+    paddingBottom: 25,
     width: 150,
   },
   parameterRow: {
@@ -63,10 +66,12 @@ const styles = StyleSheet.create({
   parameterLabel: {
     color: "#fff",
     fontSize: 14,
+    fontFamily: "RobotoMedium",
   },
   parameterValue: {
     color: "#fff",
     fontSize: 14,
+    fontFamily: "RobotoBold",
   },
 });
 
