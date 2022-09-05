@@ -16,13 +16,13 @@ const theme = {
 };
 
 const App = () => {
-  const [loaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     RobotoBold: require("./assets/fonts/Roboto-Bold.ttf"),
     RobotoMedium: require("./assets/fonts/Roboto-Medium.ttf"),
     RobotoRegular: require("./assets/fonts/Roboto-Regular.ttf"),
   });
 
-  if (!loaded) return null;
+  if (!fontsLoaded) return null;
 
   return (
     <Provider store={store}>
