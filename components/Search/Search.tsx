@@ -14,7 +14,7 @@ import CurrentWeather from "../CurrentWeather/CurrentWeather";
 import ForecastWeather from "../ForecastWeather/ForecastWeather";
 
 const Search = () => {
-  const { input, display, citiesData, handleOnPress, handleChange } =
+  const { input, display, citiesData, handleOnPress, handleOnChange } =
     useSearch();
 
   return (
@@ -24,7 +24,7 @@ const Search = () => {
           style={styles.input}
           placeholder="Search for city"
           value={input}
-          onChange={handleChange}
+          onChange={handleOnChange}
           placeholderTextColor={"#454545"}
         />
         <ScrollView horizontal={true}>

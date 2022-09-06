@@ -30,7 +30,7 @@ export const useSearch = () => {
     }
   };
 
-  const handleChange = ({
+  const handleOnChange = ({
     nativeEvent,
   }: NativeSyntheticEvent<TextInputChangeEventData>) => {
     const { text } = nativeEvent;
@@ -53,6 +53,6 @@ export const useSearch = () => {
     citiesData,
     handleOnPress,
     setInput,
-    handleChange,
+    handleOnChange,
   };
 };
