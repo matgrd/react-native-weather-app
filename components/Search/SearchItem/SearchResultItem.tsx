@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { City } from "../SearchTypes";
-import { styles } from "./SearchItemStyles";
+import { styles } from "./SearchResultItemStyles";
 
-const SearchItem = ({ item }: { item: City }) => {
+const SearchResultItem = ({ item }: { item: City }) => {
   return (
     <View style={styles.box}>
       <MaterialIcons
@@ -19,4 +19,4 @@ const SearchItem = ({ item }: { item: City }) => {
   );
 };
 
-export default SearchItem;
+export default SearchResultItem;
