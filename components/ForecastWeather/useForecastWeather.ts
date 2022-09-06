@@ -12,21 +12,19 @@ export const useForecastWeather = () => {
   const dispatch = useAppDispatch();
 
   const geographicalCoordinatesLatitude = useAppSelector(
-    (state) => state.geographicalCoordinates.latitude
+    ({ geographicalCoordinates }) => geographicalCoordinates.latitude
   );
   const geographicalCoordinatesLongitude = useAppSelector(
-    (state) => state.geographicalCoordinates.longitude
+    ({ geographicalCoordinates }) => geographicalCoordinates.longitude
   );
   const geographicalCoordinatesStatus = useAppSelector(
-    (state) => state.geographicalCoordinates.status
+    ({ geographicalCoordinates }) => geographicalCoordinates.status
   );
-
-  const api = WEATHER_API_URL;
 
   const fetchForecastWeather = () => {
     axios
       .get<ForecastWeatherResponse>(
-        `${api.baseUrl}forecast?lat=${geographicalCoordinatesLatitude}&lon=${geographicalCoordinatesLongitude}&appid=${api.key}&units=metric`
+        `${WEATHER_API_URL.baseUrl}forecast?lat=${geographicalCoordinatesLatitude}&lon=${geographicalCoordinatesLongitude}&appid=${WEATHER_API_URL.key}&units=metric`
       )
       .then((response) => {
         setForecastWeather(response.data);

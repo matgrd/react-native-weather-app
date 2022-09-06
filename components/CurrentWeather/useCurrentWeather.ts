@@ -9,16 +9,14 @@ export const useCurrentWeather = () => {
   const dispatch = useAppDispatch();
 
   const geographicalCoordinatesLatitude = useAppSelector(
-    (state) => state.geographicalCoordinates.latitude
+    ({ geographicalCoordinates }) => geographicalCoordinates.latitude
   );
   const geographicalCoordinatesLongitude = useAppSelector(
-    (state) => state.geographicalCoordinates.longitude
+    ({ geographicalCoordinates }) => geographicalCoordinates.longitude
   );
   const geographicalCoordinatesStatus = useAppSelector(
-    (state) => state.geographicalCoordinates.status
+    ({ geographicalCoordinates }) => geographicalCoordinates.status
   );
-
-  const api = WEATHER_API_URL;
 
   const [currentWeather, setCurrentWeather] =
     useState<CurrentWeatherResponse | null>(null);
@@ -26,12 +24,12 @@ export const useCurrentWeather = () => {
   const fetchCurrentWeather = () => {
     axios
       .get<CurrentWeatherResponse>(
-        `${api.baseUrl}weather?lat=${geographicalCoordinatesLatitude}&lon=${geographicalCoordinatesLongitude}&appid=${api.key}&units=metric`
+        `${WEATHER_API_URL.baseUrl}weather?lat=${geographicalCoordinatesLatitude}&lon=${geographicalCoordinatesLongitude}&appid=${WEATHER_API_URL.key}&units=metric`
       )
       .then((response) => {
         setCurrentWeather(response.data);
       })
-      .catch((err) => console.dir(err))
+      .catch((err) => console.error(err))
       .finally(() => {
         dispatch(setStatus(false));
       });
