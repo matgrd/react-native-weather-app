@@ -7,7 +7,6 @@ import {
   setLongitude,
   setStatus,
 } from "../../redux/slices/geographicalCoordinatesSlice";
-import { debounce } from "lodash";
 import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
 
 export const useSearch = () => {
@@ -30,14 +29,13 @@ export const useSearch = () => {
       }
     }
   };
-  const debounceLoadOptions = debounce(loadOptions, 300);
 
   const handleChange = ({
     nativeEvent,
   }: NativeSyntheticEvent<TextInputChangeEventData>) => {
     const { text } = nativeEvent;
     setInput(text);
-    debounceLoadOptions(input);
+    loadOptions(input);
   };
 
   const handleOnPress = (item: City) => {
