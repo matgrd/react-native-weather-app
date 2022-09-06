@@ -29,7 +29,7 @@ export const useForecastWeather = () => {
       .then((response) => {
         setForecastWeather(response.data);
       })
-      .catch((err) => console.dir(err))
+      .catch((err) => console.error(err))
       .finally(() => {
         dispatch(setStatus(false));
       });
