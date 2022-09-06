@@ -19,7 +19,6 @@ export const useSearch = () => {
   const dispatch = useAppDispatch();
 
   const loadOptions = async (text: string) => {
-    console.log("seraching");
     if (text.length > 2) {
       let response = await fetch(
         `${geoApiUrl}/cities?minPopulation=10000&namePrefix=${text}`,
