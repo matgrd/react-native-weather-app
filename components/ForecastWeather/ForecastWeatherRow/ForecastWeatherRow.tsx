@@ -41,8 +41,8 @@ const ForecastWeatherRow = ({ item, index }: { item: List; index: number }) => {
             valueText={`${item.main.pressure} hPa`}
             styles={[
               styles.parameterRow,
-              styles.parameterRow,
               styles.parameterLabel,
+              styles.parameterValue,
             ]}
           />
           <DetailsRow
@@ -50,8 +50,8 @@ const ForecastWeatherRow = ({ item, index }: { item: List; index: number }) => {
             valueText={`${item.main.humidity}%`}
             styles={[
               styles.parameterRow,
-              styles.parameterRow,
               styles.parameterLabel,
+              styles.parameterValue,
             ]}
           />
           <DetailsRow
@@ -59,8 +59,8 @@ const ForecastWeatherRow = ({ item, index }: { item: List; index: number }) => {
             valueText={`${item.clouds.all} %`}
             styles={[
               styles.parameterRow,
-              styles.parameterRow,
               styles.parameterLabel,
+              styles.parameterValue,
             ]}
           />
           <DetailsRow
@@ -68,8 +68,8 @@ const ForecastWeatherRow = ({ item, index }: { item: List; index: number }) => {
             valueText={`${item.wind.speed} m/s`}
             styles={[
               styles.parameterRow,
-              styles.parameterRow,
               styles.parameterLabel,
+              styles.parameterValue,
             ]}
           />
           <DetailsRow
@@ -77,8 +77,8 @@ const ForecastWeatherRow = ({ item, index }: { item: List; index: number }) => {
             valueText={`${item.main.sea_level} m`}
             styles={[
               styles.parameterRow,
-              styles.parameterRow,
               styles.parameterLabel,
+              styles.parameterValue,
             ]}
           />
           <DetailsRow
@@ -86,8 +86,8 @@ const ForecastWeatherRow = ({ item, index }: { item: List; index: number }) => {
             valueText={`${Math.round(item.main.feels_like)}°C`}
             styles={[
               styles.parameterRow,
-              styles.parameterRow,
               styles.parameterLabel,
+              styles.parameterValue,
             ]}
           />
         </View>

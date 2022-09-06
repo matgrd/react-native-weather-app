@@ -40,8 +40,8 @@ const CurrentWeather = () => {
                 valueText={`${Math.round(currentWeather.main.feels_like)}°C%`}
                 styles={[
                   styles.parameterRow,
-                  styles.parameterRow,
                   styles.parameterLabel,
+                  styles.parameterValue,
                 ]}
               />
               <DetailsRow
@@ -49,8 +49,8 @@ const CurrentWeather = () => {
                 valueText={`${currentWeather.wind.speed} m/s`}
                 styles={[
                   styles.parameterRow,
-                  styles.parameterRow,
                   styles.parameterLabel,
+                  styles.parameterValue,
                 ]}
               />
               <DetailsRow
@@ -58,8 +58,8 @@ const CurrentWeather = () => {
                 valueText={`${currentWeather.main.humidity}%`}
                 styles={[
                   styles.parameterRow,
-                  styles.parameterRow,
                   styles.parameterLabel,
+                  styles.parameterValue,
                 ]}
               />
               <DetailsRow
@@ -67,8 +67,8 @@ const CurrentWeather = () => {
                 valueText={`${currentWeather.main.pressure} hPa`}
                 styles={[
                   styles.parameterRow,
-                  styles.parameterRow,
                   styles.parameterLabel,
+                  styles.parameterValue,
                 ]}
               />
             </View>
