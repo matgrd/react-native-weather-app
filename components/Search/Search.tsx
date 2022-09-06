@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { styles } from "./SearchStyles";
 import { useSearch } from "./useSearch";
-import SearchItem from "./SearchItem/SearchItem";
+import SearchResultItem from "./SearchItem/SearchResultItem";
 import CurrentWeather from "../CurrentWeather/CurrentWeather";
 import ForecastWeather from "../ForecastWeather/ForecastWeather";
 
@@ -33,7 +33,7 @@ const Search = () => {
             renderItem={({ item }) => {
               return (
                 <Pressable onPress={() => handleOnPress(item)}>
-                  <SearchItem item={item} />
+                  <SearchResultItem item={item} />
                 </Pressable>
               );
             }}
