@@ -8,6 +8,7 @@ import {
   setStatus,
 } from "../../redux/slices/geographicalCoordinatesSlice";
 import { debounce } from "lodash";
+import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
 
 export const useSearch = () => {
   const [input, setInput] = useState("");
@@ -18,8 +19,7 @@ export const useSearch = () => {
   const dispatch = useAppDispatch();
 
   const loadOptions = async (text: string) => {
-    setInput(text);
-
+    console.log("seraching");
     if (text.length > 2) {
       let response = await fetch(
         `${geoApiUrl}/cities?minPopulation=10000&namePrefix=${text}`,
@@ -31,8 +31,15 @@ export const useSearch = () => {
       }
     }
   };
-
   const debounceLoadOptions = debounce(loadOptions, 300);
+
+  const handleChange = ({
+    nativeEvent,
+  }: NativeSyntheticEvent<TextInputChangeEventData>) => {
+    const { text } = nativeEvent;
+    setInput(text);
+    debounceLoadOptions(input);
+  };
 
   const handleOnPress = (item: City) => {
     dispatch(setLatitude(item.latitude));
@@ -43,21 +50,12 @@ export const useSearch = () => {
     setDisplay(true);
   };
 
-  const handleOnChange = (text: string) => {
-    setInput(text);
-    debounce(async () => {
-      if (text.length > 2) {
-        let response = await fetch(
-          `${geoApiUrl}/cities?minPopulation=10000&namePrefix=${text}`,
-          geoApiOptions
-        );
-        if (response) {
-          const data = await response.json();
-          setCitiesData(data.data);
-        }
-      }
-    }, 300);
+  return {
+    input,
+    display,
+    citiesData,
+    handleOnPress,
+    setInput,
+    handleChange,
   };
-
-  return { input, display, citiesData, handleOnChange, handleOnPress };
 };
