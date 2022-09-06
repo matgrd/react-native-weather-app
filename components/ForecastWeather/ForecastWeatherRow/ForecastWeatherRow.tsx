@@ -1,4 +1,5 @@
 import { List } from "../ForecastWeatherTypes";
+import DetailsRow from "../../Common/DetailsRow";
 import { styles } from "./ForecastWeatherRowStyles";
 import { useForecastWeatherRow } from "./useForecastWeatherRow";
 import { Text, View, Image, TouchableOpacity } from "react-native";
@@ -35,32 +36,60 @@ const ForecastWeatherRow = ({ item, index }: { item: List; index: number }) => {
       </View>
       {showDetails && (
         <View style={styles.details}>
-          <View style={styles.parameterRow}>
-            <Text style={styles.parameterLabel}>Pressure: </Text>
-            <Text style={styles.parameterValue}>{item.main.pressure} hPa</Text>
-          </View>
-          <View style={styles.parameterRow}>
-            <Text style={styles.parameterLabel}>Humidity: </Text>
-            <Text style={styles.parameterValue}>{item.main.humidity}%</Text>
-          </View>
-          <View style={styles.parameterRow}>
-            <Text style={styles.parameterLabel}>Clouds:</Text>
-            <Text style={styles.parameterValue}>{item.clouds.all} %</Text>
-          </View>
-          <View style={styles.parameterRow}>
-            <Text style={styles.parameterLabel}>Wind:</Text>
-            <Text style={styles.parameterValue}>{item.wind.speed} m/s</Text>
-          </View>
-          <View style={styles.parameterRow}>
-            <Text style={styles.parameterLabel}>Sea level:</Text>
-            <Text style={styles.parameterValue}>{item.main.sea_level} m</Text>
-          </View>
-          <View style={styles.parameterRow}>
-            <Text style={styles.parameterLabel}>Feels like:</Text>
-            <Text style={styles.parameterValue}>
-              {Math.round(item.main.feels_like)}°C
-            </Text>
-          </View>
+          <DetailsRow
+            labelText="Pressure:"
+            valueText={`${item.main.pressure} hPa`}
+            styles={[
+              styles.parameterRow,
+              styles.parameterRow,
+              styles.parameterLabel,
+            ]}
+          />
+          <DetailsRow
+            labelText="Humidity:"
+            valueText={`${item.main.humidity}%`}
+            styles={[
+              styles.parameterRow,
+              styles.parameterRow,
+              styles.parameterLabel,
+            ]}
+          />
+          <DetailsRow
+            labelText="Clouds:"
+            valueText={`${item.clouds.all} %`}
+            styles={[
+              styles.parameterRow,
+              styles.parameterRow,
+              styles.parameterLabel,
+            ]}
+          />
+          <DetailsRow
+            labelText="Wind:"
+            valueText={`${item.wind.speed} m/s`}
+            styles={[
+              styles.parameterRow,
+              styles.parameterRow,
+              styles.parameterLabel,
+            ]}
+          />
+          <DetailsRow
+            labelText="Sea level:"
+            valueText={`${item.main.sea_level} m`}
+            styles={[
+              styles.parameterRow,
+              styles.parameterRow,
+              styles.parameterLabel,
+            ]}
+          />
+          <DetailsRow
+            labelText="Feels like:"
+            valueText={`${Math.round(item.main.feels_like)}°C`}
+            styles={[
+              styles.parameterRow,
+              styles.parameterRow,
+              styles.parameterLabel,
+            ]}
+          />
         </View>
       )}
     </>
