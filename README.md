@@ -29,13 +29,13 @@ You should  create file an .env.
 The content of the file should look like this:
 
 ```
-X_RAPID_API_KEY=X_RAPID_API_KEY
+X_RAPID_API_KEY=[X_RAPID_API_KEY]
 
-OPEN_WEATHER=OPEN_WEATHER
+OPEN_WEATHER=[OPEN_WEATHER]
 ```
-In place of X_RAPID_API_KEY, enter the API key from https://rapidapi.com/wirefreethought/api/geodb-cities/
+In place of [X_RAPID_API_KEY], enter the API key from https://rapidapi.com/wirefreethought/api/geodb-cities/
 
-In place of OPEN_WEATHER, enter the API key from https://openweathermap.org/
+In place of [OPEN_WEATHER], enter the API key from https://openweathermap.org/
 
 You should also install the Expo app from Google Play on your phone
 https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pl&gl=US
